@@ -1,26 +1,30 @@
-# Makefile for compiling the mync program
-
 # Compiler
 CXX = g++
 
 # Compiler flags
 CXXFLAGS = -Wall -Wextra -std=c++11
 
-# Executable name
-TARGET = mync
+# Executable names
+TARGET1 = mync
+TARGET2 = ttt
 
 # Source files
-SRCS = mync.cpp
+SRCS1 = mync.cpp
+SRCS2 = ttt.cpp
 
 # Object files
-OBJS = $(SRCS:.cpp=.o)
+OBJS1 = $(SRCS1:.cpp=.o)
+OBJS2 = $(SRCS2:.cpp=.o)
 
 # Default target
-all: $(TARGET)
+all: $(TARGET1) $(TARGET2)
 
-# Linking the executable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+# Linking the executables
+$(TARGET1): $(OBJS1)
+	$(CXX) $(CXXFLAGS) -o $(TARGET1) $(OBJS1)
+
+$(TARGET2): $(OBJS2)
+	$(CXX) $(CXXFLAGS) -o $(TARGET2) $(OBJS2)
 
 # Compiling source files
 %.o: %.cpp
@@ -28,10 +32,6 @@ $(TARGET): $(OBJS)
 
 # Clean up
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJS1) $(OBJS2) $(TARGET1) $(TARGET2)
 
-# Run the program with the ttt example
-run_ttt:
-	./$(TARGET) -e "ttt 123456789"
-
-.PHONY: all clean run_ttt
+.PHONY: all clean
